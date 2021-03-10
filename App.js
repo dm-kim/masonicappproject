@@ -16,73 +16,73 @@ import {
   Image,
   StatusBar,
   FlatList,
+  Button,
+  SectionList,
+  TouchableOpacity,
 } from 'react-native';
 
 import Header from './components/Header';
-import ListItem from './components/ListItem';
-//import FlatListHeader from './components/FlatListHeader';
+import { jobsListData } from './data/jobsListData';
+import JobsTab from './components/tabs/Jobs';
 
+const HOME = 'home'
 
-//How do I make it so that I can pass in the title of the header?
-WeeklyFlatListHeader = () => (
-  <View style={styles.flatListHeaderView}>
-    <Text style={styles.flatListHeaderText}> Weekly Jobs </Text>
-  </View>
-);
-
-MonthlyFlatListHeader = (title) => (
-  <Header title={} description={}/>
-  <View style={styles.flatListHeaderView}>
-    <Text style={styles.flatListHeaderText}> {title} Jobs </Text>
-  </View>
-);
+//When someone clicks on the title of a job, this function runs
+const pressHandlerJob = (item) => {
+  console.log(item.title);
+}
 
 const App = () => {
-  const [weeklyItems, setWeeklyItems] = useState ([
-    {id: 1, text:  'Rags and Kitchen Surfaces', nameText: 'MK'},
-    {id: 2, text:  'Common Areas and Garage', nameText: 'KM'},
-    {id: 3, text:  'Shopping', nameText: 'JP'},
-    {id: 4, text:  'Trash, Recycling, Compost', nameText: 'JL'},
-  ]);
+    const [openTabName, setOpenTabName] = useState(HOME);
 
-  const [monthlyItems, setMonthlyItems] = useState ([
-    {id: 1, text:  '1 Mop & 1 Bathroom Clean & 2 Vacuums', nameText: 'MK'},
-    {id: 2, text:  '1 Mop & 1 Bathroom Clean & 2 Vacuums', nameText: 'KM'},
-    {id: 3, text:  'Fridge Organize + Clean and Filler', nameText: 'JP'},
-    {id: 4, text:  'Dishes', nameText: 'JL'},
-  ]);
-
-  return (
-    <View style={styles.container}>
-      <Header title="Masonic Jobs List"/>
-      <FlatList 
-        data={weeklyItems}
-        //ListHeaderComponent = { this.WeeklyFlatListHeader}
-        renderItem ={({item}) => <ListItem item= {item}/> }
-        />
-      <FlatList 
-        data={monthlyItems}
-        ListHeaderComponent = { this.MonthlyFlatListHeader}
-        renderItem ={({item}) => <ListItem item= {item}/> }
-        />
-    </View>
-  );a
+    const renderJobsTab  = () => {
+      return <JobsTab
+      test={'test'}
+      onClosePress={()=> setOpenTabName(HOME)} />
+    }
+    console.log(openTabName)
+    if (openTabName === HOME){
+      return (<SafeAreaView>
+        <Text>Test</Text>
+        <Text>Test</Text>
+        <Text>Test</Text>
+        <Text>Test</Text>
+        <Text>Test</Text>
+        <Text>Test</Text>
+        <Text>Test</Text>
+        <Text>Test</Text>
+        <Button style = {styles.sectionHeader} title={'Jobs'} onPress={() => setOpenTabName('anything')} />
+      </SafeAreaView>)
+    }
+    // if openTabName === 'Jobs' renderJobsTab()
+    // 
+    return renderJobsTab();
 };
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 40,
     flex:1, 
-    paddingTop: 60,
   },
-  flatListHeaderView: {
+  sectionHeader: {
     padding: 15,
+    top: 100,
     backgroundColor: 'lavender',
-  },
-  flatListHeaderText: {
-    color: 'dimgray',
-    fontSize: 16,
     textAlign: 'center',
+    fontSize: 28,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    fontSize: 14,
   },  
+  circle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: 50,
+    backgroundColor: 'gray',
+  }
 });
 
 export default App;
