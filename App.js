@@ -40,6 +40,7 @@ const App = () => {
       test={'test'}
       onClosePress={()=> setOpenTabName(HOME)} />
     }
+    
     console.log(openTabName)
     if (openTabName === HOME){
       return (<SafeAreaView>
